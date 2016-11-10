@@ -13,6 +13,9 @@ Suscribers are called **consumers**.
 ### Topic:
 **Topics** is the place in Apache Kafka where all the messages will be send and read from.  
 
+ ![](https://github.com/dilipthelip/ApacheKafka/blob/master/kafka1.png)
+
+
 ### Broker:
 **Broker** is the place in Apache Kafka which will carry all the topics. Broker is nothing but a server.  
 

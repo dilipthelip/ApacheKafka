@@ -18,7 +18,7 @@ Suscribers are called **consumers**.
 
 Broker is a software process or referred to as an executable which runs on a machine(Physical machine or Virtual machine). Broker has access to the resources on the machine such as a file system which it uses to store messages which it catrgorizes as topics
 
- 
+ ![](https://github.com/dilipthelip/ApacheKafka/blob/master/kafka3.png)
 
 
 

@@ -5,7 +5,7 @@
 A high throughput distributed messaging system.  
 Addresses shortcomings of traditional data movement tools and approaches.
 
-Apache Kafka is a Publish/Subscribe messaging system.  
+Apache Kafka is a **Publish/Subscribe** messaging system.  
 
 Publishers are called **producers**.    
 Suscribers are called **consumers**.  
@@ -13,7 +13,7 @@ Suscribers are called **consumers**.
 ### Topic:
 **Topics** is the place in Apache Kafka where all the messages will be send and read from.  
 
- ![](https://github.com/dilipthelip/ApacheKafka/blob/master/kafka1.png)
+ ![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka1.png)
 
 
 ### Broker:
@@ -21,9 +21,9 @@ Suscribers are called **consumers**.
 
 Broker is a software process or referred to as an executable which runs on a machine(Physical machine or Virtual machine). Broker has access to the resources on the machine such as a file system which it uses to store messages which it catrgorizes as topics
 
- ![](https://github.com/dilipthelip/ApacheKafka/blob/master/kafka2.png)  
+ ![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka2.png)  
 
- ![](https://github.com/dilipthelip/ApacheKafka/blob/master/kafka3.png)  
+ ![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka3.png)  
  
  You can scale the number of brokers without affecting the current broker and consumer architecture.  
  Kafka cluster is a grouping of multiple kafka brokers.  
@@ -36,9 +36,18 @@ A distributed system is one that consists of multiple independent workers or nod
 
 The system of nodes require coordination to ensure consistence and progress towards a common goal.Each node communicates with each other thorough messages.  
 
-![](https://github.com/dilipthelip/ApacheKafka/blob/master/kafka4.png)  
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka4.png)  
 
-![](https://github.com/dilipthelip/ApacheKafka/blob/master/kafka5.png)  
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka5.png)  
+
+
+## ApacheZookeper:  
+
+It is a centralized service for maintianing metadata about a cluster of distributed nodes.  
+- Configuration information.  
+- Health Stats  
+- Froup Membership  
+
 
 
 

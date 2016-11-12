@@ -38,6 +38,8 @@ The system of nodes require coordination to ensure consistence and progress towa
 
 ![](https://github.com/dilipthelip/ApacheKafka/blob/master/kafka4.png)  
 
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/kafka5.png)  
+
 
 
 

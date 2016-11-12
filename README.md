@@ -1,6 +1,6 @@
 # ApacheKafka
 
-This tutorial is created is based on the tutorial from PluralSight.  
+This tutorial is created is based on the tutorial from PluralSight. This README is totally based on Windows OS.    
 
 ## What is Apache Kafka ?
 
@@ -112,14 +112,14 @@ How does the different consumers maintaining their autonomy ?
 -	Physical storage resources can constrain message retention.  
 	
 	
-	
-		
-	
+### How to start Zookeeper?
+
+-	Navigate to the bin/windows directory.  
+-	Run the **zookeeper-server-start.bat** file.This file looks for zookeper.propeties file.  
+-	Run the follwing command **zookeeper-server-start.bat ..\..\config\zookeeper.properties**.  
+
+To check whether the zookeper client is up. We need to enable telnet in windows.  
+
+Follow this [link](https://kb.ctera.com/article/how-to-open-a-telnet-session-on-windows-7-or-windows-8-os-16.html) to enable Telnet in windows.  
 
 
-
-
-
-
-
- 

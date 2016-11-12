@@ -50,6 +50,13 @@ It is a centralized service for maintianing metadata about a cluster of distribu
 
 ![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka6.png)  
 
+### Download Apache Kafka:
+
+Download Apache Kafka from the below link. Download the latest one from the Binary downloads section. It was **Scala 2.11  - kafka_2.11-0.10.1.0.tgz** when this readMe was created.  
+
+[Download](https://kafka.apache.org/downloads.html)
+
+
 
 
  

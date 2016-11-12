@@ -83,6 +83,41 @@ The timestamp and Referencable identifier helps to identify the message.
 
 ![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka9.png)  
 
+### Kafka Consumers:  
+
+How does the different consumers maintaining their autonomy ?  
+
+	-	It mainitains it using **Message Offset**.
+	-	The offset is like a bookmark that maintains the last read position.  
+	-	The offset is entirely established and maintained by a KAFKA consumer.   
+	-	Since the consumer is responsible for reading the messages and processing on its own.  
+	-	The offset itself corresponds to the message identifier. This is the same Mesage Identifier as like the Reference identifier.  
+	-	The **CONSUMER** decides what message it wants to consume.  
+		-	Consumer can read from the beginning.  
+		-	The Offset gets increased after the consumer started to consume messages.   
+				
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka10.png)  
+
+	-	Whenever there is a new message arrives the TOPIC then connected consumers will be connected to it.  
+	-	Once the last message is read in the TOPIC then the consumer sets it offset and maintains it.  
+	
+### Message Retention policy:  
+
+	-	All Kafka retains all published messages regardless of consumption.  
+	-	Retention period is cofigurable.  
+			-	By default the retention period is 7 days or 168 hours.  
+			
+	-	The retention period is set on a per topic basis.  
+	-	Within a cluster you can have different topics configured with different retention periods.  
+	-	Physical storage resources can constrain message retention.  
+	
+	
+	
+		
+	
+
+
+
 
 
 

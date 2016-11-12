@@ -1,5 +1,7 @@
 # ApacheKafka
 
+This tutorial is created is based on the tutorial from PluralSight.  
+
 ## What is Apache Kafka ?
 
 A high throughput distributed messaging system.  
@@ -55,6 +57,32 @@ It is a centralized service for maintianing metadata about a cluster of distribu
 Download Apache Kafka from the below link. Download the latest one from the Binary downloads section. It was **Scala 2.11  - kafka_2.11-0.10.1.0.tgz** when this readMe was created.  
 
 [Download](https://kafka.apache.org/downloads.html)
+
+## Apache kafka Topic:
+
+An Apache Kafka topic can expand to multiple clusters.
+
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka7.png)  
+
+### Flow of messages in to topic from Producer:
+
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka8.png)  
+
+### Message Content:  
+
+Kafka topic stores a time ordered sequence of messages that share the same category.  
+
+Each Message has the following:  
+
+The timestamp and Referencable identifier helps to identify the message.  
+
+- TimeStamp
+- Referencable identifier : The message recieved gets a unique identifier
+	- A combination of timestamp and Referencable identifer form its placement in the sequence of messages recieved within the topic.  
+- Payload (binary) : This is the actual data that is sent by the producer.
+
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka9.png)  
+
 
 
 

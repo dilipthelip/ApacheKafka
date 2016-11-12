@@ -48,7 +48,7 @@ It is a centralized service for maintianing metadata about a cluster of distribu
 - Health Stats  
 - Froup Membership  
 
-
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka6.png)  
 
 
 

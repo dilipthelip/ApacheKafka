@@ -21,10 +21,22 @@ Suscribers are called **consumers**.
 
 Broker is a software process or referred to as an executable which runs on a machine(Physical machine or Virtual machine). Broker has access to the resources on the machine such as a file system which it uses to store messages which it catrgorizes as topics
 
- ![](https://github.com/dilipthelip/ApacheKafka/blob/master/kafka2.png)
+ ![](https://github.com/dilipthelip/ApacheKafka/blob/master/kafka2.png)  
 
- ![](https://github.com/dilipthelip/ApacheKafka/blob/master/kafka3.png)
+ ![](https://github.com/dilipthelip/ApacheKafka/blob/master/kafka3.png)  
+ 
+ You can scale the number of brokers without affecting the current broker and consumer architecture.  
+ Kafka cluster is a grouping of multiple kafka brokers.  
+ 
+**Distrubuted Systems :**  
+ 
+ A system is a collection of resources that are instructed to achieve a specific goal or function.  
+ 
+A distributed system is one that consists of multiple independent workers or nodes.  
 
+The system of nodes require coordination to ensure consistence and progress towards a common goal.Each node communicates with each other thorough messages.  
+
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/kafka4.png)  
 
 
 

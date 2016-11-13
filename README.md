@@ -143,5 +143,21 @@ How does the different consumers maintaining their autonomy ?
 
 ### How to instantiate a Consumer?  
 
--	Run the following command **kafka-console-consumer.bat --zookeeper localhost:2181 --topic my_topic --from-beginning**.    
+-	Run the following command **kafka-console-consumer.bat --zookeeper localhost:2181 --topic my_topic --from-beginning**.  
+-	Start typing the messge in the producer window and those messages will be rendered in the console window.    
+
+## Kafka Partitions:  
+-	Each Topic has one or more partitions.  
+-	A partition is the basis foe which Kafka can:
+	-	Scale.  
+	-	Become fault-tolerant.  
+	-	Achieve higher levels of throughput.  
+-	Each partion is maintained on at least one or more brokers.  
+-	Here is the create topic command **kafka-topics.bat --create --topic my_topic -zookeeper localhost:2181 --replication-factor 1 --partitions 1**.  
+-	At a minimum each topic has to have a single Partition. Partition is the physical representation of a commit log stored on one or more brokers.  
+-	If you want to have more messages to be processed parallely then we need to have more partitions.    
+-	You might be wondering how the Kafka partions splits the messages? It is based on the partitioning scheme that is established by the producer.    
+
+
+	
 	

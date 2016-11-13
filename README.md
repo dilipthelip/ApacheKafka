@@ -146,8 +146,9 @@ How does the different consumers maintaining their autonomy ?
 -	Run the following command **kafka-console-consumer.bat --zookeeper localhost:2181 --topic my_topic --from-beginning**.  
 -	Start typing the messge in the producer window and those messages will be rendered in the console window.    
 
-## Kafka Partitions:  
+## Kafka Partitions: (LOG)   
 -	Each Topic has one or more partitions.  
+-	The number of partitions per topic is entirely configurable.  
 -	A partition is the basis foe which Kafka can:
 	-	Scale.  
 	-	Become fault-tolerant.  
@@ -156,8 +157,39 @@ How does the different consumers maintaining their autonomy ?
 -	Here is the create topic command **kafka-topics.bat --create --topic my_topic -zookeeper localhost:2181 --replication-factor 1 --partitions 1**.  
 -	At a minimum each topic has to have a single Partition. Partition is the physical representation of a commit log stored on one or more brokers.  
 -	If you want to have more messages to be processed parallely then we need to have more partitions.    
--	You might be wondering how the Kafka partions splits the messages? It is based on the partitioning scheme that is established by the producer.    
+-	You might be wondering how the Kafka partions splits the messages? It can be based on the partitioning scheme that is established by the producer.If no mechanism is mentioned then it uses Round-Robin fashion.      
+-	Each and every partion is mutually exclusive.  
+
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka11.png)  
+
+## Overall Picture of Apache Kafka:  
+
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka12.png)   
+
+-	When a create topic command is issued, ZooKeeper which maintains the metadata about the brokers in the cluster receives the request and checks for available brokers and assigns a leader for each partition.  
+-	 When the assignment is made then each  kafka broker assigns a log for the newly assigned partion. The hosting directory will be named as per the topic+partition number.  
+-	Each individual broker maintains of the subset of the metadata created by zookeeper. Metadata includes mapping of what partions are managed by what brokers?  
+-	Status is sent by each broker to zookeeper.  
+
+### Kafka Producer point of view:  
+
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka13.png)   
+
+-	When the producer is ready to send messages in to the Apache Kafka Cluster. It must have knowledge abbout atlease one of the broker to which it has to send the message.  
+-	The metadata related data is sent back to the kafka producer which has the partition related information.  
+
+### Kafka Consumer point of view:  
+
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka14.png)   
+
+-	Consumer inquires zookeeper about which zookeeper owns which partition.  
+-	Once it gets the information it fetches the message from the appropriate partion in the topic which sits on a specific broker in a cluster.  
 
 
-	
+
+ 
+
+
+
+
 	

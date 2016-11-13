@@ -128,7 +128,9 @@ How does the different consumers maintaining their autonomy ?
 
 
 ### How to create a Topic?  
--	Run the following command **kafka-topics.bat --create --topic my_topic -zookeeper localhost:2181 --replication-factor 1 --partitions 1**.  
+	
+-	Run the following command **kafka-topics.bat --create --topic my_topic -zookeeper localhost:2181 --replication-factor 1 --partitions 1**. 
+	-	**partitions**	-	Partitions is the base for Sacalability and achieve high levels of throughput. Check the **Kafka Partiotions** section below.  
 -	You will notice the following line in the command line window.  
 -	WARNING: Due to limitations in metric names, topics with a period ('.') or underscore ('_') could collide. To avoid issues it is best to use either, but not both.  
 -	Created topic "my_topic".  
@@ -149,7 +151,7 @@ How does the different consumers maintaining their autonomy ?
 ## Kafka Partitions: (LOG)   
 -	Each Topic has one or more partitions.  
 -	The number of partitions per topic is entirely configurable.  
--	A partition is the basis foe which Kafka can:
+-	A partition is the basis for which Kafka can:
 	-	Scale.  
 	-	Become fault-tolerant.  
 	-	Achieve higher levels of throughput.  
@@ -192,6 +194,18 @@ How does the different consumers maintaining their autonomy ?
 	-	Single partion for global ordering.  
 	-	Consumer handling for ordering.  
 -	The more partions the longer the leader fail-over time.  
+
+### Fault Tolerance:  
+
+-	Broker Failure  
+-	Network issue  
+-	Disk Failure  
+
+-	If one of the broker fails, then the zookeeper knows about it and assigns the request to the available broker.  
+-	The producers and consumers will be updated with the latest metadata.But the previous messages that were lost in the previous partion will not be accessible.  
+-	
+
+
 
 
 	

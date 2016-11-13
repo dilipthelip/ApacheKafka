@@ -142,7 +142,6 @@ How does the different consumers maintaining their autonomy ?
 - 	Once the above command is run, you can have the window open and type whatever you want.After each enter the message gets pushed to the broker.  
 
 ### How to instantiate a Consumer?  
--	Run the following command **kafka-console-consumer.bat --zookeeper localhost:2181 --topic my_topic --from-beginning**  
--	
 
--	
+-	Run the following command **kafka-console-consumer.bat --zookeeper localhost:2181 --topic my_topic --from-beginning**.    
+	

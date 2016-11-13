@@ -128,7 +128,21 @@ How does the different consumers maintaining their autonomy ?
 
 
 ### How to create a Topic?  
--	Run the following command **kafka-topics.bat --create --topic my_topic -zookeeper localhost:2181 --replication-factor 1 --partitions 1**.
--	You will notice the following line in the command line window. 
--	WARNING: Due to limitations in metric names, topics with a period ('.') or underscore ('_') could collide. To avoid issues it is best to use either, but not both.
--	Created topic "my_topic".
+-	Run the following command **kafka-topics.bat --create --topic my_topic -zookeeper localhost:2181 --replication-factor 1 --partitions 1**.  
+-	You will notice the following line in the command line window.  
+-	WARNING: Due to limitations in metric names, topics with a period ('.') or underscore ('_') could collide. To avoid issues it is best to use either, but not both.  
+-	Created topic "my_topic".  
+
+### How to check the list of topics?  
+-	Run the following command **kafka-topics.bat --list --zookeeper localhost:2181**.  
+-	The results will display **my_topic**.  
+
+### How to instantiate a producer?  
+- 	Run the following command **kafka-console-producer.bat --broker-list localhost:9092 --topic my_topic**  
+- 	Once the above command is run, you can have the window open and type whatever you want.After each enter the message gets pushed to the broker.  
+
+### How to instantiate a Consumer?  
+-	Run the following command **kafka-console-consumer.bat --zookeeper localhost:2181 --topic my_topic --from-beginning**  
+-	
+
+-	

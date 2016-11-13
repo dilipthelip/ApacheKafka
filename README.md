@@ -185,6 +185,16 @@ How does the different consumers maintaining their autonomy ?
 -	Consumer inquires zookeeper about which zookeeper owns which partition.  
 -	Once it gets the information it fetches the message from the appropriate partion in the topic which sits on a specific broker in a cluster.  
 
+#### Disadvantages of more partitions:
+
+-	The more partiotions the greater the zookeeper overhead.  
+-	Message ordering can become complex.  
+	-	Single partion for global ordering.  
+	-	Consumer handling for ordering.  
+-	The more partions the longer the leader fail-over time.  
+
+
+	
 
 
  

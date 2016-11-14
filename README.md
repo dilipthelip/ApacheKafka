@@ -59,8 +59,9 @@ Download Apache Kafka from the below link. Download the latest one from the Bina
 [Download](https://kafka.apache.org/downloads.html)
 
 ## Apache kafka Topic:
-
-An Apache Kafka topic can expand to multiple clusters.
+-	Kafka topic is a named feed or category of messages.  
+-	An Apache Kafka topic can expand to multiple clusters for the benefit of scalability.  
+-		
 
 ![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka7.png)  
 
@@ -218,6 +219,16 @@ How does the different consumers maintaining their autonomy ?
 ![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka15.png)   
 
 As per the above image the replication-factor value is set as 3 then three copies of the topic will be created. The ISR(In Sync Replica) value is reported throughout the cluster.If the ISR = rep Factor the topic  in each partition within the topic is in a healthy state.  
+
+## Producing Messages with Apache Kafka?  
+
+Add the below dependency.  
+
+	-<dependency>
+	-		<groupId>org.apache.kafka</groupId>
+	-		<artifactId>kafka-clients</artifactId>
+	-		<version>0.10.0.1</version>
+	-	</dependency>
 
 
 

@@ -116,13 +116,13 @@ How does the different consumers maintaining their autonomy ?
 
 -	Navigate to the bin/windows directory.  
 -	Run the **zookeeper-server-start.bat** file.This file looks for zookeper.propeties file.  
--	Run the follwing command **zookeeper-server-start.bat ../\..\config\zookeeper.properties**.  
+-	Run the follwing command **zookeeper-server-start.bat ..\\..\config\zookeeper.properties**.  
 -	You will notice the below line in the command line which tells you that it had successfully started the Zookeper.  
 -   [2016-11-13 08:40:23,040] INFO binding to port 0.0.0.0/0.0.0.0:2181 (org.apache.zookeeper.server.NIOServerCnxnFactory)  
 
 ### How to start a Kafka Broker?  
 
--	The process a very simple. Run the **kafka-server-start.bat ../\..\config\server.properties** file.  
+-	The process a very simple. Run the **kafka-server-start.bat ..\\..\config\server.properties** file.  
 -	You will notice the below line in the command line window. This confirms the KAFKA sever is successfully started.  
 -	[2016-11-13 08:47:08,463] INFO Registered broker 0 at path /brokers/ids/0 with addresses: PLAINTEXT -> EndPoint(2QBZP12.hq.target.com,9092,PLAINTEXT) (kafka.utils.ZkUtils  
 

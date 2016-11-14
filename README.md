@@ -230,7 +230,7 @@ Add the below dependency.
 	-		<version>0.10.0.1</version>
 	-	</dependency>
 
-
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka16.png)   
 
 
 

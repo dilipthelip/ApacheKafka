@@ -223,7 +223,9 @@ As per the above image the replication-factor value is set as 3 then three copie
 ## Producing Messages with Apache Kafka?  
 
 Add the below dependency.  
+
 ```
+
 <dependency>
 <groupId>org.apache.kafka</groupId>
 <artifactId>kafka-clients</artifactId>

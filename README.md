@@ -203,7 +203,7 @@ How does the different consumers maintaining their autonomy ?
 
 -	If one of the broker fails, then the zookeeper knows about it and assigns the request to the available broker.  
 -	The producers and consumers will be updated with the latest metadata.But the previous messages that were lost in the previous partion will not be accessible.  
--	
+
 
 
 

@@ -116,13 +116,13 @@ How does the different consumers maintaining their autonomy ?
 
 -	Navigate to the bin/windows directory.  
 -	Run the **zookeeper-server-start.bat** file.This file looks for zookeper.propeties file.  
--	Run the follwing command **zookeeper-server-start.bat ..\..\config\zookeeper.properties**.  
+-	Run the follwing command **zookeeper-server-start.bat ../\..\config\zookeeper.properties**.  
 -	You will notice the below line in the command line which tells you that it had successfully started the Zookeper.  
 -   [2016-11-13 08:40:23,040] INFO binding to port 0.0.0.0/0.0.0.0:2181 (org.apache.zookeeper.server.NIOServerCnxnFactory)  
 
 ### How to start a Kafka Broker?  
 
--	The process a very simple. Run the **kafka-server-start.bat ..\..\config\server.properties** file.  
+-	The process a very simple. Run the **kafka-server-start.bat ../\..\config\server.properties** file.  
 -	You will notice the below line in the command line window. This confirms the KAFKA sever is successfully started.  
 -	[2016-11-13 08:47:08,463] INFO Registered broker 0 at path /brokers/ids/0 with addresses: PLAINTEXT -> EndPoint(2QBZP12.hq.target.com,9092,PLAINTEXT) (kafka.utils.ZkUtils  
 
@@ -131,6 +131,7 @@ How does the different consumers maintaining their autonomy ?
 	
 -	Run the following command **kafka-topics.bat --create --topic my_topic -zookeeper localhost:2181 --replication-factor 1 --partitions 1**. 
 	-	**partitions**	-	Partitions is the base for Sacalability and achieve high levels of throughput. Check the **Kafka Partiotions** section below.  
+	-	**replication-factor**	-	
 -	You will notice the following line in the command line window.  
 -	WARNING: Due to limitations in metric names, topics with a period ('.') or underscore ('_') could collide. To avoid issues it is best to use either, but not both.  
 -	Created topic "my_topic".  
@@ -204,16 +205,21 @@ How does the different consumers maintaining their autonomy ?
 -	If one of the broker fails, then the zookeeper knows about it and assigns the request to the available broker.  
 -	The producers and consumers will be updated with the latest metadata.But the previous messages that were lost in the previous partion will not be accessible.  
 
+### Replication Factor:  
+-	This makes sure there is going to be reliable work distribution.  
+-	This ensures that the messages are stored redundantly across multiple brokers.  
+-	Cluster resilency  
+- 	Fault Tolerance  
+**Guarantees:**  
+-	It is recommended to keep the value 2 or 3.  
+-	N-1 broker failure tolerance.  
+-	Its configured per topic basis.  
+
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka15.png)   
+
+As per the above image the replication-factor value is set as 3 then three copies of the topic will be created. The ISR(In Sync Replica) value is reported throughout the cluster.If the ISR = rep Factor the topic  in each partition within the topic is in a healthy state.  
 
 
 
 
-	
 
-
- 
-
-
-
-
-	

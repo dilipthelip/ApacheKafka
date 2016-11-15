@@ -176,7 +176,11 @@ ISR(in Sync Replica) ->	Since the ISR== Replica we can say that the partition an
 -	Here is the create topic command **kafka-topics.bat --create --topic my_topic -zookeeper localhost:2181 --replication-factor 1 --partitions 1**.  
 -	At a minimum each topic has to have a single Partition. Partition is the physical representation of a commit log stored on one or more brokers.  
 -	If you want to have more messages to be processed parallely then we need to have more partitions.    
--	You might be wondering how the Kafka partions splits the messages? It can be based on the partitioning scheme that is established by the producer.If no mechanism is mentioned then it uses Round-Robin fashion.      
+-	You might be wondering how the Kafka partions splits the messages? It can be based on the partitioning scheme that is established by the producer.If no mechanism is mentioned then it uses Round-Robin fashion.  
+		-	Direct  
+		-	Roung-Robin  
+		-	key mod -hash(MurMurhashing) 
+		-	custom	
 -	Each and every partion is mutually exclusive.  
 
 ![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka11.png)  
@@ -323,5 +327,33 @@ Createtime - then the producer set timestamp is used.
 LogAppendTime - The producer set timestamp is overriden by the broker set timestamp when the message is appended to the commit log.  
 
 key - You can define the partition to which the producer need to publish the message to.  
+```
+KafkaProducer<String,String> myProducer= new KafkaProducer<String,String>(properties);
+ProducerRecord<String, String> producerRecord= new ProducerRecord<String, String>("my_topic", "MyMessage1");
+myProducer.send(producerRecord);
+```  
+**Sequence of steps after the send call:**  
+-	When the producer calls the send method , the producer reaches out to the cluster using the bootstrap.servers property to get the metadata. Containing detailed information about the topic, partitions and their managing brokers on the cluster.     
+-	This metadata object is used to instantiate a metadata object in the producer.Throughout the producer life cycle this metadata information is maintained with the latest data.  
+**Serialization:**
+-	Now the producer have the producerrecord object,pass the message in to the serializer using the configured serializer.  
+**Partitioner:**  
+-	Next comes the partitioner, the task here is to determine to which partition in the cluster should the message be sent to.  
+**Partitioner Check 1:**  
+-	The Kafka Producer checks for a partition value in the producer object. If **yes** then it checks whether the partion is a valid one using the metadata returned by the cluster.
+	-	If the partition is not valid then there will be some exception(InvalidArgumentException) which will abort the send 		operation. 
+	-	If the partition is valid then the message will be sent to the broker using **direct** strategy.  
+**Partitioner Check 2:**  
+-	If the partition is not mentioned then the producer checks whether any "key" reffered in the producer.  
+	-	If there is no key mentioned then round-robin strategy will be used to push the message in to the broker.  
+	-	If there is a key provided then whether a non default partitioner class is provided instantiate a Kakfa producer.
+		-	For this the producer class checks in the producerconfig object and looks for a specific value PARTIOTIONER_CLASS_CONFIG.This refers to the **partitioner.class** in the properties object that was passed to create the kafka producer object.  
+		-	If there is no value mentioned then the producerconfig refers to the default partitioner class.Default partitioner uses a murmurhash and applies a modular function for the number of topics and thats how it determines which partition to use in the topic.  
+		-	If there is a user defined Custom Partitioner class then it uses custom based partition scheme to decide on which partition that the message needs to be sent to. Add the class to the classpath and assign the new class against the **partitioner.class** property.  
+		
 
+		
+		
+	
 
+	

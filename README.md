@@ -220,6 +220,29 @@ How does the different consumers maintaining their autonomy ?
 
 As per the above image the replication-factor value is set as 3 then three copies of the topic will be created. The ISR(In Sync Replica) value is reported throughout the cluster.If the ISR = rep Factor the topic  in each partition within the topic is in a healthy state.  
 
+### How to run Multiple KafkaBroker in Local?  
+-	Navigate to the **config** folder inside Kafka distribution.  
+-	Create Server-0, Server-1...Server-n.properties.**n** represents the number of brokers.  
+-	Change the broker.id, port, log.dirs to an unique inside each broker.  
+```
+Eg., 
+**Server-0.properties**  
+broker.id=1
+port=9092
+log.dir=/tmp/kafka-logs-1
+
+**Server-1.properties**  
+broker.id=2
+port=9093
+log.dir=/tmp/kafka-logs-2
+
+**Server-2.properties**  
+broker.id=3
+port=9094
+log.dir=/tmp/kafka-logs-3
+
+```
+
 ## Producing Messages with Apache Kafka?  
 
 Add the below dependency.  

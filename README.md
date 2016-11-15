@@ -224,15 +224,38 @@ As per the above image the replication-factor value is set as 3 then three copie
 
 Add the below dependency.  
 
-```<dependency>` 
+```<dependency> 
 <groupId>org.apache.kafka</groupId>
 <artifactId>kafka-clients</artifactId>
 <version>0.10.0.1</version>
 </dependency>
 ```
-
-
 ![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka16.png)   
+
+### Creating a KAFKA producer:  
+
+-	Mandatory property values for the KAFKA producer.  
+```
+Properties properties=new Properties();
+		properties.put("bootstrap.servers", "BROKER-1:9092, BROKER-1:9092");
+		properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+		properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+```
+-	ProducerRecord is the class which holds the payload that will be published to the Kafka.
+-	ProducerRecord requires only two values Topic and Value. The optional parameters are partition,Timestamp and Key.
+	-	Topic	(Mandatory)
+	-	Value	(Mandatory)
+	-	Partition
+	-	TimeStamp
+	-	Key
+```
+ProducerRecord<String, String> producerRecord= new ProducerRecord<String, String>("my_topic", "MyMessage1");  
+```
+
+-	Kafka producer instances can only send ProducerRecords that match the key and value serializer types they are configured with.  
+-	If the serializer type does not match then it will through some run time exception(SerializationException).  
+-	
+
 
 
 

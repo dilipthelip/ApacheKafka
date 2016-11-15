@@ -141,9 +141,23 @@ How does the different consumers maintaining their autonomy ?
 -	Run the following command **kafka-topics.bat --list --zookeeper localhost:2181**.  
 -	The results will display **my_topic**.  
 
+### How to check the configuration of a topic?  
+-	Run the following command **kafka-topics.bat --describe --topic replicate_topic --zookeeper localhost:2181**
+-	This command will give you the below result.  
+```
+Topic:replicate_topic   PartitionCount:1        ReplicationFactor:3     Configs:
+        Topic: replicate_topic  Partition: 0    Leader: 1       Replicas: 1,2,0 Isr: 1,2,0
+```
+
+Leader : 1 ->	This conveys that the node 1 is the leader.  
+Replicas: 1,2,0 -> This conveys there is a replica in node 1,2 and 0.  
+ISR(in Sync Replica) ->	Since the ISR== Replica we can say that the partition and everything in healthy state.  
+
+
 ### How to instantiate a producer?  
 - 	Run the following command **kafka-console-producer.bat --broker-list localhost:9092 --topic my_topic**  
 - 	Once the above command is run, you can have the window open and type whatever you want.After each enter the message gets pushed to the broker.  
+
 
 ### How to instantiate a Consumer?  
 
@@ -223,7 +237,7 @@ As per the above image the replication-factor value is set as 3 then three copie
 ### How to run Multiple KafkaBroker in Local?  
 -	Navigate to the **config** folder inside Kafka distribution.  
 -	Create Server-0, Server-1...Server-n.properties.**n** represents the number of brokers.  
--	Change the broker.id, port, log.dirs to an unique inside each broker.  
+-	Change the broker.id, port, log.dirs to an unique value inside each broker.  
 ```
 Eg., 
 **Server-0.properties**  

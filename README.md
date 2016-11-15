@@ -159,6 +159,7 @@ ISR(in Sync Replica) ->	Since the ISR== Replica we can say that the partition an
 - 	Once the above command is run, you can have the window open and type whatever you want.After each enter the message gets pushed to the broker.  
 
 
+
 ### How to instantiate a Consumer?  
 
 -	Run the following command **kafka-console-consumer.bat --zookeeper localhost:2181 --topic my_topic --from-beginning**.  

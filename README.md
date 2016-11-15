@@ -241,21 +241,49 @@ Properties properties=new Properties();
 		properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 		properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 ```
--	ProducerRecord is the class which holds the payload that will be published to the Kafka.
--	ProducerRecord requires only two values Topic and Value. The optional parameters are partition,Timestamp and Key.
-	-	Topic	(Mandatory)
-	-	Value	(Mandatory)
-	-	Partition
-	-	TimeStamp
-	-	Key
+
+-	Kafka producer does not connect to all the mentioned brokers. It connects to one of the available brokers in the list.It is recommended to provide more than one broker. This is to make sure if the one of the broker mentioned is not available then it connects to the other one. 
+**Key and Value Serializers:**  
+-	Message content is encoded as binary. This is to optimize the size of the messages. Not only for network transmission and also for storage and compression. Since producers is the beginning of the message life cycle it is responbile for describing how the message contents are to be encoded.So that the consumer can know how to decode them.  
+-	If you notice above we have used StringSerializer. This is one of the mostly used type in Kafka.  
+
+-	There are many ways to instantiate a Kafka Producer.Below is a common way of declaring a KAFKA producer.  
+`KafkaProducer<String,String> myProducer= new KafkaProducer<String,String>(properties);'  
+- 	The implemenation of Kafka producer represents a ProducerConfig class. Using the properties sent as an argument the instance of ProducerConfig class will be instantiated.  
+-	From this instantiated producerConfig object the Key and value serializer will be intialized.Setting the internal values of the producer to expect the key and value of type 	String.   
+- 	This is a type safe contract between the Kafka producer and the messages specification it is configured to produce.This contract extends to the consumer who reads the message from the Kafka topic need to know the message type contract to successfully decode the message from the Kafka Topic.  
+-	Kafka Producer sends **ProducerRecord**.  
+-	ProducerRecord is the class which holds the payload that will be published to the Kafka.  
+-	ProducerRecord requires only two values Topic and Value. The optional parameters are partition,Timestamp and Key.  
+	-	Topic	(Mandatory)  
+	-	Value	(Mandatory)  
+	-	Partition  
+	-	TimeStamp  
+	-	Key  
+
+### Approach 1:
 ```
 ProducerRecord<String, String> producerRecord= new ProducerRecord<String, String>("my_topic", "MyMessage1");  
 ```
 
+### Approach 2:  
+```
+ProducerRecord<String, String> producerRecord1= new ProducerRecord<String, String>("my_topic",1,System.currentTimeMillis(), "key", "MyMessage1" );
+```
+
+1 - refers to the partion in the Topic.  
+System.currentTimeMillis() -	This is not a required value and this gets appended to the message and adding an additional overhead of 8 bytes to the message.  
 -	Kafka producer instances can only send ProducerRecords that match the key and value serializer types they are configured with.  
--	If the serializer type does not match then it will through some run time exception(SerializationException).  
--	
+-	If the serializer type does not match then it will through some run time exception(SerializationException) and nothing will be sent to the Kafka cluster.  
 
+There is a log timestamp setting available in the server.properties file.  
 
+```
+log.message.timestamp.type =[Createtime, LogAppendTime]
+```
+Createtime - then the producer set timestamp is used.  
+LogAppendTime - The producer set timestamp is overriden by the broker set timestamp when the message is appended to the commit log.  
+
+key - You can define the partition to which the producer need to publish the message to.  
 
 

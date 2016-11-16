@@ -351,6 +351,13 @@ myProducer.send(producerRecord);
 		-	If there is no value mentioned then the producerconfig refers to the default partitioner class.Default partitioner uses a murmurhash and applies a modular function for the number of topics and thats how it determines which partition to use in the topic.  
 		-	If there is a user defined Custom Partitioner class then it uses custom based partition scheme to decide on which partition that the message needs to be sent to. Add the class to the classpath and assign the new class against the **partitioner.class** property.  
 		
+**RecordAccumulator:**  
+-	Producer now dispatches the message to a queue like data structure which is called Record Accumulator.  
+-	Lot of resources are involved in order to read or publish a message in to a Topic which eventually is a overhead for the system. So resources are gracefully used in Kafka in order to maintain efficiency and high throughput.  
+-	Suppose you have a garage full of boxes you need to move all of them to a new place. If the goal is efficiency meaning with less time and enerygy. What type of vehicle would you use in this case ? Car or Truck ?. The answer is Moving truck. Truck will take lesser time compare to a car. Because there is going to be less trips compared to car.  
+-	Kafka uses a similar kind of approach **Micro Batching**.Same concept in the producer, consumer and Kafka end.    
+
+		
 
 		
 		

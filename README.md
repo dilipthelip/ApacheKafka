@@ -379,6 +379,25 @@ linger.ms=1ms
 		
 -	When the **producerRecord** is sent to the broker then a **RecordMetaData** which will have information about the message that are successfully or unsuccessfully received.  
 
+### Delivery Guarantees:  
+-	When a producer sends a record , producer can specify what level of acknowledgment it expects from the broker.This setting is called **acks**.This can be set using the Properties setting while instantiating an **KafkaProducer**.    
+	- Different settings for **acks**:  
+		-	0:fire and forget - Dangerous Option, No acknowledgement from Broker.  
+		-	1:leader Acknowledged - Accept the acknowledgement only from the leader.It does not expect the acknowledgement from the other replica brokers.    
+		-	2:replication quorum acknowledgement - Acknowledgment from the all sync replicas.This provides a higher level of assurance that the message was successfully sent and received.The performance will be really low with this settings.  
+**Broker responds with error:**  
+-	Have the **retries** configuration employed.  
+-	**retry.backoff.m** - wait time between retries.  
+
+### Ordering guarantees:  
+-	Messages are ordered by partiotion not globally across partitions.  
+-	Orders can get complicated if you have retry enabled.  
+-	This can be handled **max.in.flight.request.per.connection** to 1.At any given time only one request can be sent.  
+
+		
+			
+
+
 
 
 		

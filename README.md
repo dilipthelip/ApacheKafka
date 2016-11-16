@@ -358,10 +358,28 @@ myProducer.send(producerRecord);
 -	Kafka uses a similar kind of approach **Micro Batching**.Same concept in the producer, consumer and Kafka end.    
 -	Record Accumulator has a collection of **RecordBatch** for each **topic-partition** combination.The number of producer records that a single **Recordbatch**  can hold is based on a number of factors.  
 
-![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka16.png)   
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka17.png)   
 
+-	Each **Recordbatch** has a limit of how many producer records it can hold.It is maintained by **batch.size**.It represents the maximum number of bytes each and every **RecordBatch** can hold.  
+-	There is a global threshold value **buffer.memory** which represents the total number of bytes that all the buffers can hold.  
+-	If the **ProducerRecord** in **RecordBatch** reaches the **buffer.memory** value then **max.block.ms** comes in to effect.  	
+-	This **max.block.ms** value represents how many millisecs that **producer.send** method will be blocked for.    
+-	When the record gets accumulated in the **Recordbatch** then two things happen.  
+	-	If the total buffer size reaches the batch size limit then the records are sent immediately.
+	-	If the total buffer size does not reach the threshold then how long a producer record can wait in the **RecordBatch**?
+		-	Another property **linger.ms** comes in to picture.This represents how long the unfilled buffer can wait ?  
+		-	It checks for the below condition and sends the message to the topic.  
+```
+if(recordbatch.size<batch.size)  
+linger.ms=1ms
+```
 
+-	
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka17.png)   
 		
+-	When the **producerRecord** is sent to the broker then a **RecordMetaData** which will have information about the message that are successfully or unsuccessfully received.  
+
+
 
 		
 		

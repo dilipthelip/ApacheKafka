@@ -356,6 +356,10 @@ myProducer.send(producerRecord);
 -	Lot of resources are involved in order to read or publish a message in to a Topic which eventually is a overhead for the system. So resources are gracefully used in Kafka in order to maintain efficiency and high throughput.  
 -	Suppose you have a garage full of boxes you need to move all of them to a new place. If the goal is efficiency meaning with less time and enerygy. What type of vehicle would you use in this case ? Car or Truck ?. The answer is Moving truck. Truck will take lesser time compare to a car. Because there is going to be less trips compared to car.  
 -	Kafka uses a similar kind of approach **Micro Batching**.Same concept in the producer, consumer and Kafka end.    
+-	Record Accumulator has a collection of **RecordBatch** for each **topic-partition** combination.The number of producer records that a single **Recordbatch**  can hold is based on a number of factors.  
+
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka16.png)   
+
 
 		
 

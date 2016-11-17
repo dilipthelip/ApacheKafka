@@ -375,7 +375,7 @@ linger.ms=1ms
 ```
 
 -	
-![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka17.png)   
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka18.png)   
 		
 -	When the **producerRecord** is sent to the broker then a **RecordMetaData** which will have information about the message that are successfully or unsuccessfully received.  
 
@@ -400,12 +400,90 @@ Check the **KafkaProducerApp** in the workspace.
 
 ## Kafka CONSUMER:  
 
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka19.png)  
 
+### How to subscribe to a topic?  
 
+**Approach 1:**  
+```
+Properties properties=new Properties();
+		properties.put("bootstrap.servers", "localhost:9092, localhost:9093");
+		properties.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+		properties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 		
-			
+		KafkaConsumer< String, String> consumer=new KafkaConsumer<String, String>(properties);
+		consumer.subscribe(Arrays.asList("replicate-topic")); // You can subscribe to any number of topics.
+```
 
+**Approach 2:**		
+```
+Properties properties=new Properties();
+		properties.put("bootstrap.servers", "localhost:9092, localhost:9093");
+		properties.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+		properties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+		
+		KafkaConsumer< String, String> consumer=new KafkaConsumer<String, String>(properties);
+		//Alternatively you can use Regular expression.
+		
+		consumer.subscribe(Arrays.asList("rep*"));
+```
 
+### What happens when you call the subscribe method multiple times ?		 
+
+```
+consumer.subscribe(Arrays.asList("replicate-topic"));
+```
+
+```
+consumer.subscribe(Arrays.asList("my-topic"));
+```
+
+The second call overrides the first subscription.  
+
+The ideal scenario is to maintain the topics in a List.  
+```
+List<String> topics=new ArrayList<String>();
+		topics.add("replicate-topic");
+		topics.add("my-topic");
+		
+		consumer.subscribe(topics); // You can subscribe to any number of topics.
+```
+
+### How to unsudscribe to a topic?  
+
+**Approach 1:**
+
+You can unsubscribe using **unsubscribe** method.
+
+```
+KafkaConsumer< String, String> consumer=new KafkaConsumer<String, String>(properties);
+		
+		List<String> topics=new ArrayList<String>();
+		topics.add("replicate-topic");
+		topics.add("my-topic");
+		
+		consumer.subscribe(topics); // You can subscribe to any number of topics.
+		
+		
+		consumer.unsubscribe();
+		
+```
+
+**Approach 2:**
+
+```
+	KafkaConsumer< String, String> consumer=new KafkaConsumer<String, String>(properties);
+		
+		List<String> topics=new ArrayList<String>();
+		topics.add("replicate-topic");
+		topics.add("my-topic");
+		
+		consumer.subscribe(topics); // You can subscribe to any number of topics.
+		topics.clear();
+		
+		consumer.subscribe(topics) // passing an empty list.  
+		
+```
 
 
 		

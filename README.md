@@ -394,6 +394,14 @@ linger.ms=1ms
 -	Orders can get complicated if you have retry enabled.  
 -	This can be handled **max.in.flight.request.per.connection** to 1.At any given time only one request can be sent.  
 
+### Demo for Kafka Producer:  
+
+Check the **KafkaProducerApp** in the workspace.  
+
+## Kafka CONSUMER:  
+
+
+
 		
 			
 

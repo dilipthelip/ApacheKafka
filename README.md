@@ -576,8 +576,11 @@ Properties properties=new Properties();
 ### How to test this ? How to publish bunch of messages to the Kafka Topic?  
 
 Run the below command:  
+This command will publish a bunch of messages in to the cluster.  
 **kafka-producer-perf-test.bat --topic consumer-topic-1 --num-records 50 --record-size 1 --throughput 10 --producer-props bootstrap.servers=localhost:9092 key.serializer=org.apache.kafka.common.serialization.StringSerializer value.serializer=org.apache.kafka.common.serialization.StringSerializer**
 		
-	
+If you run this command **kafka-producer-perf-test.bat** then in the console you will find details about each and every attribute listed in the console.  
+
+
 
 	

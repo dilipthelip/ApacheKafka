@@ -529,12 +529,54 @@ KafkaConsumer< String, String> consumer=new KafkaConsumer<String, String>(proper
 ## The Poll Loop:  
 
 -	This is the primary function of the KAFKA consumer. This is the **heart and soul** of kafka consumer.  
--	Continiously polling for brokers for data.  
--	
+-	Continiously polling for brokers for data using the poll method.  
 
+Sample Consumer code for Subscribe:  
 
-
+```
+Properties properties=new Properties();
+		properties.put("bootstrap.servers", "localhost:9091");
+		properties.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+		properties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+		properties.put("group.id","test");
 		
+		KafkaConsumer< String, String> consumer=new KafkaConsumer<String, String>(properties);
+		
+		
+		ArrayList<String> topics=new ArrayList<String>();
+		topics.add("consumer-topic-1");
+		topics.add("consumer-topic-2");
+		
+		consumer.subscribe(topics); // You can subscribe to any number of topics.
+		
+		try {
+			
+			while(true){
+				
+				ConsumerRecords<String, String> records = consumer.poll(10);
+				
+				for(ConsumerRecord<String, String> record : records){
+					
+					System.out.println("Record read in KafkaConsumerApp : " +  record.toString());
+				}
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Inside exception loop : ");
+			e.printStackTrace();
+		}finally{
+			consumer.close();
+		}
+	}
+	
+```
+
+
+### How to test this ? How to publish bunch of messages to the Kafka Topic?  
+
+Run the below command:  
+**kafka-producer-perf-test.bat --topic consumer-topic-1 --num-records 50 --record-size 1 --throughput 10 --producer-props bootstrap.servers=localhost:9092 key.serializer=org.apache.kafka.common.serialization.StringSerializer value.serializer=org.apache.kafka.common.serialization.StringSerializer**
 		
 	
 

@@ -449,7 +449,7 @@ List<String> topics=new ArrayList<String>();
 		consumer.subscribe(topics); // You can subscribe to any number of topics.
 ```
 
-### How to unsudscribe to a topic?  
+### How to unsubscribe to a topic?  
 
 **Approach 1:**
 
@@ -484,6 +484,31 @@ KafkaConsumer< String, String> consumer=new KafkaConsumer<String, String>(proper
 		consumer.subscribe(topics) // passing an empty list.  
 		
 ```
+
+### Difference between Subscribe and Assign:  
+
+**Subscribe:**  
+-	This is method is for Topics.  
+-	You can subscribe to one topic, one to many partitions.  
+-	You can subscribe to many topics, many more partitions.  
+
+**Assign:**  
+-	This method is for Partitions.  
+-	One or more Partitions , regardless of topic.  
+-	Manual , Self administering mode.  
+
+```
+KafkaConsumer< String, String> consumer=new KafkaConsumer<String, String>(properties);
+		
+		TopicPartition partition=new TopicPartition("replicate-topic", 0);
+		ArrayList<TopicPartition> partitions=new ArrayList<TopicPartition>();
+		partitions.add(partition);
+		
+		consumer.assign(partitions); //Remember this is not incremental.  
+```  
+
+
+
 
 
 		

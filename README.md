@@ -137,6 +137,11 @@ How does the different consumers maintaining their autonomy ?
 -	WARNING: Due to limitations in metric names, topics with a period ('.') or underscore ('_') could collide. To avoid issues it is best to use either, but not both.  
 -	Created topic "my_topic".  
 
+### How to alter a topic in a broker ?  
+
+-	Run the following command **kafka-topics.bat --zookeeper localhost:2181 --alter --topic --my-topic partitions 4**  
+-	The following command will increase the number of partitions to 4.  
+
 ### How to check the list of topics?  
 -	Run the following command **kafka-topics.bat --list --zookeeper localhost:2181**.  
 -	The results will display **my_topic**.  
@@ -580,6 +585,20 @@ This command will publish a bunch of messages in to the cluster.
 **kafka-producer-perf-test.bat --topic consumer-topic-1 --num-records 50 --record-size 1 --throughput 10 --producer-props bootstrap.servers=localhost:9092 key.serializer=org.apache.kafka.common.serialization.StringSerializer value.serializer=org.apache.kafka.common.serialization.StringSerializer**
 		
 If you run this command **kafka-producer-perf-test.bat** then in the console you will find details about each and every attribute listed in the console.  
+
+## Kafka Consumer Polling:  
+
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka20.png)  
+
+-	When Subscribe or Assign method is invoked then the content within the Collection object is user to set the Subscriptionstate object within the consumer.  
+-	This objects stands as a source of truth for the relationship between the cluster ,broker and the Kafka consumer.  
+-	SubscriptionState object plays works well with the **ConsumerCoordinator** in managing the ffset.  
+-	When the **poll()** method is invoked , using the **bootstrap.servers** property the consumer invokes  the cluster to fetch the metadata using the Fetcher. This starts the communication between the consumer and broker.  
+-	Fetcher communicates with the Broker using the Consumer Network client. This client sends TCP packets and the consuer sends heartbeats which enables the cluster to know what consumers are connected.  
+-	Additionally the initial response for metadata is sent and recieved.The metadata will be kept updtodate whenerver the  poll method is invoked.  
+-	Once the metadata is recieved then it will be sent to Consumer coordinator which in turn updates the Subscription state with the new partition assignments and offset details.  
+-	The fetcher needs to know which partitions or which topics does the consumer need to pull the messaged from it gets those details from the SubscriptionState object.  
+-	The arguments inside the **poll(100)** represents the number of milliseconds the network client is to spend polling the cluster for new messages.When the timeout expires a batchof records added to an in memory buffer where they are deserialized , grouped in to consumer records by topic and partitions.Once the fetcher finishes the process it returns the object for further processing.   
 
 
 

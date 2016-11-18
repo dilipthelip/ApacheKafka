@@ -132,7 +132,7 @@ How does the different consumers maintaining their autonomy ?
 	
 -	Run the following command **kafka-topics.bat --create --topic my_topic -zookeeper localhost:2181 --replication-factor 1 --partitions 1**. 
 	-	**partitions**	-	Partitions is the base for Sacalability and achieve high levels of throughput. Check the **Kafka Partiotions** section below.  
-	-	**replication-factor**	-	
+	-	**replication-factor**	-	This ensures that the messages are stored redundantly across multiple brokers.  
 -	You will notice the following line in the command line window.  
 -	WARNING: Due to limitations in metric names, topics with a period ('.') or underscore ('_') could collide. To avoid issues it is best to use either, but not both.  
 -	Created topic "my_topic".  
@@ -144,7 +144,7 @@ How does the different consumers maintaining their autonomy ?
 
 ### How to check the list of topics?  
 -	Run the following command **kafka-topics.bat --list --zookeeper localhost:2181**.  
--	The results will display **my_topic**.  
+-	The results will display list of topics avalilable  in the cluster.  
 
 ### How to check the configuration of a topic?  
 -	Run the following command **kafka-topics.bat --describe --topic replicate_topic --zookeeper localhost:2181**
@@ -159,7 +159,7 @@ Replicas: 1,2,0 -> This conveys there is a replica in node 1,2 and 0.
 ISR(in Sync Replica) ->	Since the ISR== Replica we can say that the partition and everything in healthy state.  
 
 
-### How to check the configuration of a different topics in a broker?  
+### How to check the configuration of a all topics in a cluster?  
 -	Run the following command **kafka-topics.bat --describe --zookeeper localhost:2181**  
 -	This command will give you the below result.  
 
@@ -180,7 +180,7 @@ Topic:replicate_topic   PartitionCount:1        ReplicationFactor:3     Configs:
 
 ### How to instantiate a producer?  
 - 	Run the following command **kafka-console-producer.bat --broker-list localhost:9092 --topic my_topic**  
-- 	Once the above command is run, you can have the window open and type whatever you want.After each enter the message gets pushed to the broker.  
+- 	Once the above command is run, you can have the window open and type whatever you want.Every time you press the **Enter** key the message gets pushed to the broker.  
 
 
 
@@ -222,7 +222,7 @@ Topic:replicate_topic   PartitionCount:1        ReplicationFactor:3     Configs:
 
 ![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka13.png)   
 
--	When the producer is ready to send messages in to the Apache Kafka Cluster. It must have knowledge abbout atlease one of the broker to which it has to send the message.  
+-	When the producer is ready to send messages in to the Apache Kafka Cluster. It must have knowledge about atlease one of the broker to which it has to send the message.  
 -	The metadata related data is sent back to the kafka producer which has the partition related information.  
 
 ### Kafka Consumer point of view:  
@@ -230,7 +230,7 @@ Topic:replicate_topic   PartitionCount:1        ReplicationFactor:3     Configs:
 ![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka14.png)   
 
 -	Consumer inquires zookeeper about which zookeeper owns which partition.  
--	Once it gets the information it fetches the message from the appropriate partion in the topic which sits on a specific broker in a cluster.  
+-	Once it gets the information it fetches the message from the appropriate partition in the topic which sits on a specific broker in a cluster.  
 
 #### Disadvantages of more partitions:
 
@@ -590,9 +590,9 @@ If you run this command **kafka-producer-perf-test.bat** then in the console you
 
 ![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka20.png)  
 
--	When Subscribe or Assign method is invoked then the content within the Collection object is user to set the Subscriptionstate object within the consumer.  
+-	When Subscribe or Assign method is invoked then the content within the Collection object is used to set the Subscriptionstate object within the consumer.  
 -	This objects stands as a source of truth for the relationship between the cluster ,broker and the Kafka consumer.  
--	SubscriptionState object plays works well with the **ConsumerCoordinator** in managing the ffset.  
+-	SubscriptionState object works well with the **ConsumerCoordinator** in managing the offset.  
 -	When the **poll()** method is invoked , using the **bootstrap.servers** property the consumer invokes  the cluster to fetch the metadata using the Fetcher. This starts the communication between the consumer and broker.  
 -	Fetcher communicates with the Broker using the Consumer Network client. This client sends TCP packets and the consuer sends heartbeats which enables the cluster to know what consumers are connected.  
 -	Additionally the initial response for metadata is sent and recieved.The metadata will be kept updtodate whenerver the  poll method is invoked.  

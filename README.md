@@ -154,6 +154,25 @@ Replicas: 1,2,0 -> This conveys there is a replica in node 1,2 and 0.
 ISR(in Sync Replica) ->	Since the ISR== Replica we can say that the partition and everything in healthy state.  
 
 
+### How to check the configuration of a different topics in a broker?  
+-	Run the following command **kafka-topics.bat --describe --zookeeper localhost:2181**  
+-	This command will give you the below result.  
+
+```
+Topic:consumer-topic-1  PartitionCount:3        ReplicationFactor:1     Configs:
+        Topic: consumer-topic-1 Partition: 0    Leader: 0       Replicas: 0     Isr: 0
+        Topic: consumer-topic-1 Partition: 1    Leader: 0       Replicas: 0     Isr: 0
+        Topic: consumer-topic-1 Partition: 2    Leader: 0       Replicas: 0     Isr: 0
+Topic:consumer-topic-2  PartitionCount:3        ReplicationFactor:1     Configs:
+        Topic: consumer-topic-2 Partition: 0    Leader: 0       Replicas: 0     Isr: 0
+        Topic: consumer-topic-2 Partition: 1    Leader: 0       Replicas: 0     Isr: 0
+        Topic: consumer-topic-2 Partition: 2    Leader: 0       Replicas: 0     Isr: 0
+Topic:my_topic  PartitionCount:1        ReplicationFactor:1     Configs:
+        Topic: my_topic Partition: 0    Leader: 0       Replicas: 0     Isr: 0
+Topic:replicate_topic   PartitionCount:1        ReplicationFactor:3     Configs:
+        Topic: replicate_topic  Partition: 0    Leader: 0       Replicas: 1,2,0 Isr: 0
+```  
+
 ### How to instantiate a producer?  
 - 	Run the following command **kafka-console-producer.bat --broker-list localhost:9092 --topic my_topic**  
 - 	Once the above command is run, you can have the window open and type whatever you want.After each enter the message gets pushed to the broker.  
@@ -488,12 +507,12 @@ KafkaConsumer< String, String> consumer=new KafkaConsumer<String, String>(proper
 ### Difference between Subscribe and Assign:  
 
 **Subscribe:**  
--	This is method is for Topics.  
+-	This method is for Topic suscription.  
 -	You can subscribe to one topic, one to many partitions.  
 -	You can subscribe to many topics, many more partitions.  
 
 **Assign:**  
--	This method is for Partitions.  
+-	This method is for Partition suscription.  
 -	One or more Partitions , regardless of topic.  
 -	Manual , Self administering mode.  
 
@@ -507,7 +526,11 @@ KafkaConsumer< String, String> consumer=new KafkaConsumer<String, String>(proper
 		consumer.assign(partitions); //Remember this is not incremental.  
 ```  
 
+## The Poll Loop:  
 
+-	This is the primary function of the KAFKA consumer. This is the **heart and soul** of kafka consumer.  
+-	Continiously polling for brokers for data.  
+-	
 
 
 

@@ -660,11 +660,28 @@ Manual		=	**enable.auto.commit = false**
 -	The commit takes the batch of records and determines their offsets and asks the consumer coordinator to commit them to the kafka cluster via the consumer network client.  
 -	When the offsets are committed then the Subscription state object will be updated with the latest offset and fetcher will know what offsets are commited and from where it can read the message from the Kafka.  
 
+## Scaling with Consumer Groups:  
+
+-	A consumer group means independent consumers working as a team.  
+-	**group.id** settings is needed to be set in order to work as a consumer group.  
+-	Share the message consumption and processing load.  
+	-	Parallelism and throughput.
+	-	Redundancy.
+	-	Performance.
+-	Consumers with the same **group.id** will be considered as a consumer group.They all should be consuming the messages from the same topic.  
+-	Behind the scenes there will be a designated broker is elected to serve as a group co-ordinator. THe role is to monitor and maintain the consumer group membership.    
 
 
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka22.png)  
 
+-	The group co-ordinator interacts with the cluster and zookeepr and assigns the partitions in the topic to a specific kafka Consumer.  
+-	From the time the consumer group is formed it sends the hearbeat messages to the **group co-ordinator** at an interval specified in **hearbeat.interval.ms**.The group coordinator relies on this parameter and validates the consumer is alive and participates in the consumer group.  
+ -	The value set **session.timeout.ms** parameter is the time the group co-ordinator waits for not recieving any heartbeat to consider the consumer failed and take necessary action.  
+ -	If there is a consumer that does not sent the hearbeat past the wait time then it does the rebalance to assign the partition to the available consumer.  
 
-
+ **Rebalance** 
+ 
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka23.png)  
 
 
 

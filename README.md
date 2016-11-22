@@ -637,9 +637,28 @@ Manual		=	**enable.auto.commit = false**
 
 ### Manual Offset:  
 
+-	Consistency control
+-	In this approach you have a clear control of considering when the message is declared as done and offset can be commited.  
+
 **commitSync**
 	-	The consumer will have a precise control of when to consider a record is truly read from a broker.  
-	-	
+	-	These are synchronouos.  
+	-	The preffered time to commit the offset is after the list of consumer records are processed in the consumer from the topic. THe reason being it blocks the processing until it receives the acknowledgement from the topic.  
+	-	The good news is that it automatically retries to process until it succeeds. The retry can be set using retry.backoff.ms setting.    
+	-	It might add a overall latency to the overall polling process.
+	
+**commitASync**  
+	-	No Retries.  
+	-	You may not know whether the commit is succedded or not.  
+	-	Callback Option.With this option you can get the status of the offset and handle the response.    
+	-	The throughput and over all performance is better compared to the commitSync method.  
+	-	This is not a recommended way to commit the offset until you have a call back and handle the response gracefully.  
+
+![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka21.png)  
+
+-	The place where offset management occurs is after the poll method call times out and presented the records for processing irrespctive of the auto commit call happening in the background or the explcit commit call using the commit API's.  
+-	The commit takes the batch of records and determines their offsets and asks the consumer coordinator to commit them to the kafka cluster via the consumer network client.  
+-	When the offsets are committed then the Subscription state object will be updated with the latest offset and fetcher will know what offsets are commited and from where it can read the message from the Kafka.  
 
 
 

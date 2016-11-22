@@ -677,12 +677,17 @@ Manual		=	**enable.auto.commit = false**
 -	The group co-ordinator interacts with the cluster and zookeepr and assigns the partitions in the topic to a specific kafka Consumer.  
 -	From the time the consumer group is formed it sends the hearbeat messages to the **group co-ordinator** at an interval specified in **hearbeat.interval.ms**.The group coordinator relies on this parameter and validates the consumer is alive and participates in the consumer group.  
  -	The value set **session.timeout.ms** parameter is the time the group co-ordinator waits for not recieving any heartbeat to consider the consumer failed and take necessary action.  
- -	If there is a consumer that does not sent the hearbeat past the wait time then it does the rebalance to assign the partition to the available consumer.  
+ 
 
  **Rebalance** 
+ -	If there is a consumer that does not sent the hearbeat past the wait time then it does the rebalance to assign the partition to the available consumer.  
+ -	The newly assigned consumer will take twice the load.If the offset management is not handled correctly then there is a very high risk for duplication.    
  
 ![](https://github.com/dilipthelip/ApacheKafka/blob/master/images/kafka23.png)  
 
+-	If the faulty consumer joins back the consumer group then another rebalance occurs.  
+-	When a new partition is added to the kafka topic then rebalance occurs.  
+-	
 
 
 

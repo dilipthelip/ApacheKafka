@@ -594,11 +594,59 @@ If you run this command **kafka-producer-perf-test.bat** then in the console you
 -	This objects stands as a source of truth for the relationship between the cluster ,broker and the Kafka consumer.  
 -	SubscriptionState object works well with the **ConsumerCoordinator** in managing the offset.  
 -	When the **poll()** method is invoked , using the **bootstrap.servers** property the consumer invokes  the cluster to fetch the metadata using the Fetcher. This starts the communication between the consumer and broker.  
--	Fetcher communicates with the Broker using the Consumer Network client. This client sends TCP packets and the consuer sends heartbeats which enables the cluster to know what consumers are connected.  
+-	Fetcher communicates with the Broker using the Consumer Network client. This client sends TCP packets and the consumer sends heartbeats which enables the cluster to know what consumers are connected.  
 -	Additionally the initial response for metadata is sent and recieved.The metadata will be kept updtodate whenerver the  poll method is invoked.  
 -	Once the metadata is recieved then it will be sent to Consumer coordinator which in turn updates the Subscription state with the new partition assignments and offset details.  
--	The fetcher needs to know which partitions or which topics does the consumer need to pull the messaged from it gets those details from the SubscriptionState object.  
+-	The fetcher needs to know which partitions or which topics does the consumer need to pull the messages from it.Consumer gets those details from the SubscriptionState object.  
 -	The arguments inside the **poll(100)** represents the number of milliseconds the network client is to spend polling the cluster for new messages.When the timeout expires a batchof records added to an in memory buffer where they are deserialized , grouped in to consumer records by topic and partitions.Once the fetcher finishes the process it returns the object for further processing.   
+-	The **poll()** is a single threaded process.  
+-	There might be implications that it could not be able to process the messages real time if you the consumer subscribes to many topics and partitions.  
+
+## Consumer Offset:  
+
+-	The **Offset** is the key parameter which each and every Kafka consumer read messages from that point in the topic.  
+**Last Commiteed Offset** -  When a consumer is going to read messages from a Kafka Consumer it needs to establish **what is has?** and **what it needs to read**. This is called last committed offset.It is maintained at the partition level.Reason being each partition is mutually exclusive to each other.  
+**log-end offset:** - This specifies the last message in the partition.  
+
+#### Property parameters to maintain the **committed** offset:  
+
+The following parameters are optional.  
+
+1)	enable.auto.commit = true 
+	-	This gives Kafka the responsibitlity to manage and move the last commited offset to the current position offset.   
+2)	auto.commit.interval
+	-	By default it is set to 5000(ms).  
+	-	If you have a process that takes more than 5000(ms) then irrespective kafka is commit that offset regardless of whether it is processed or not.  
+	- 	Let us assume a scenario where something failed while processing  but the time it failed is past 5000ms then in this case it is hard to go back to the failed record because the offset is already committed by kafka.  
+
+The **Offset** commit behavior is configurable.  
+	-	By default it commits the offset after the message is read and the time is past 5seconds.  
+	
+Kafka stores the message Offset in a topic called **_consumer_offsets** with 50 partitions.  
+
+#### How to view consumer offset ?  
+
+**kafka-topics.bat --describe --topic __consumer_offsets --zookeeper localhost:2181**  
+
+**ConsumerCoordinator** is responsible object for communicating to the cluster and consumer_offsets are produced in to the topic.  
+
+Consumer Offset can be maintained either **Automatic** or **manual**.
+
+Automatic	=	**enable.auto.commit = true(Default)**  	
+Manual		=	**enable.auto.commit = false**  
+
+### Manual Offset:  
+
+**commitSync**
+	-	The consumer will have a precise control of when to consider a record is truly read from a broker.  
+	-	
+
+
+
+
+
+
+
 
 
 

@@ -687,7 +687,6 @@ Manual		=	**enable.auto.commit = false**
 
 -	If the faulty consumer joins back the consumer group then another rebalance occurs.  
 -	When a new partition is added to the kafka topic then rebalance occurs.  
--	
 
 
 

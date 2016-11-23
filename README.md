@@ -139,8 +139,8 @@ How does the different consumers maintaining their autonomy ?
 
 ### How to alter a topic in a broker ?  
 
--	Run the following command **kafka-topics.bat --zookeeper localhost:2181 --alter --topic --my-topic partitions 4**  
--	The following command will increase the number of partitions to 4.  
+-	Run the following command **kafka-topics.bat --zookeeper localhost:2181 --alter --topic my-topic --partitions 4**  
+-	The following command will increase the number of partitions the previous number to 4.  
 
 ### How to check the list of topics?  
 -	Run the following command **kafka-topics.bat --list --zookeeper localhost:2181**.  
@@ -687,7 +687,21 @@ Manual		=	**enable.auto.commit = false**
 
 -	If the faulty consumer joins back the consumer group then another rebalance occurs.  
 -	When a new partition is added to the kafka topic then rebalance occurs.  
+-	If you have a over provisioned consumers.Let us say that there are 4 consumers in the consumer group and 3 partitions. In this case the consumer group is over provisioned with one additional consumer. So in this case one additional consumer will not be assigned to read the message from Kafka.  
+-	If you delete some consumers then the partition rebalance will happen. But that does not happen immediately it takes some time to perform the rebalance.
 
+## Consumer Configuration:  
 
+-	fetch.min.bytes 	-	Minimum number of bytes that can read from the poll method.
 
+## Custom Serializer and DeSerializer:  
+
+-	**Confluent** is one of the biggest Apache Kafka contributor.
+-	**Apache Avro** serialization format.This is to address all the serialiazation and deserialization problems.
+-	The producer can serialize in an Avro version which in turn can be deserialized using the Apache avro.  
+-	Schema registry and version management can ve done in the server.
+-	THis is an open source.  
+
+## Apache Kafka Connect:  
+-	
 	

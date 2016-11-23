@@ -24,8 +24,8 @@ public class KafkaConsumerApp {
 		
 		
 		ArrayList<String> topics=new ArrayList<String>();
-		topics.add("consumer-topic-1");
-		topics.add("consumer-topic-2");
+		topics.add("consumer-group-topic");
+		//topics.add("consumer-topic-2");
 		
 		consumer.subscribe(topics); // You can subscribe to any number of topics.
 		

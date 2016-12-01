@@ -10,7 +10,7 @@ public class KafkaProducerApp {
 	public static void main(String[] args) {
 		
 		Properties properties=new Properties();
-		properties.put("bootstrap.servers", "localhost:9092,localhost:9093");
+		properties.put("bootstrap.servers", "localhost:9092");
 		properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 		properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 		
@@ -19,7 +19,7 @@ public class KafkaProducerApp {
 		try {
 			
 			for(int i=0;i<100;i++){
-				myProducer.send(new  ProducerRecord<String, String>("consumer-group-topic", "MyMessage1 " + Integer.toString(i)));
+				myProducer.send(new  ProducerRecord<String, String>("new_topic", "MyMessage1 " + Integer.toString(i)));
 				System.out.println("Sent");
 			}
 		} catch (Exception e) {

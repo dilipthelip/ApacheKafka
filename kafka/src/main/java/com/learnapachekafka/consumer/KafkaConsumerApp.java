@@ -15,7 +15,7 @@ public class KafkaConsumerApp {
 	public static void main(String[] args) {
 		
 		Properties properties=new Properties();
-		properties.put("bootstrap.servers", "localhost:9092,localhost:9093");
+		properties.put("bootstrap.servers", "localhost:9092");
 		properties.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 		properties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 		properties.put("group.id","test");
@@ -24,7 +24,7 @@ public class KafkaConsumerApp {
 		
 		
 		ArrayList<String> topics=new ArrayList<String>();
-		topics.add("consumer-group-topic");
+		topics.add("new_topic");
 		//topics.add("consumer-topic-2");
 		
 		consumer.subscribe(topics); // You can subscribe to any number of topics.

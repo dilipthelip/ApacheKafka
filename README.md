@@ -145,9 +145,8 @@ Run the **./kafka-server-start.sh ../config/server.properties**
 -	Run the following command **kafka-topics.bat --create --topic my_topic -zookeeper localhost:2181 --replication-factor 1 --partitions 1**.
 
 **MAC**  
--	Run the following command **./kafka-topics.sh --create --topic new_topic -zookeeper localhost:2181 --replication-factor 1 --partitions 1
-	-	**partitions**
-	-	Partitions is the base for Sacalability and achieve high levels of throughput. Check the **Kafka Partiotions** section below.  
+-	Run the following command **./kafka-topics.sh --create --topic new_topic -zookeeper localhost:2181 --replication-factor 1 --partitions 1**
+	-	**partitions** -	Partitions is the base for Sacalability and achieve high levels of throughput. Check the **Kafka Partiotions** section below.  
 	-	**replication-factor**	-	This ensures that the messages are stored redundantly across multiple brokers.  
 -	You will notice the following line in the command line window.  
 -	WARNING: Due to limitations in metric names, topics with a period ('.') or underscore  could collide. To avoid issues it is best to use either, but not both.  

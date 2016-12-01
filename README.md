@@ -118,6 +118,7 @@ How does the different consumers maintaining their autonomy ?
 ### How to start Zookeeper?
 
 -	Navigate to the bin/windows directory.  
+
 **Windows**  
 -	Run the **zookeeper-server-start.bat** file.This file looks for zookeper.propeties file.  
 **Mac**  
@@ -128,7 +129,8 @@ How does the different consumers maintaining their autonomy ?
 
 ### How to start a Kafka Broker?  
 
--	The process a very simple.
+-	The process a very simple.  
+
 **Windows**  
 Run the **kafka-server-start.bat ..\\..\config\server.properties** file.  
 

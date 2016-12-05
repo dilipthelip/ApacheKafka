@@ -737,5 +737,56 @@ Manual		=	**enable.auto.commit = false**
 -	Schema registry and version management can ve done in the server.
 -	THis is an open source.  
 
-## Apache Kafka Connect:  
--
+## Conumer Config Values:
+
+```
+metric.reporters = []
+       metadata.max.age.ms = 300000
+       partition.assignment.strategy = [org.apache.kafka.clients.consumer.RangeAssignor]
+       reconnect.backoff.ms = 50
+       sasl.kerberos.ticket.renew.window.factor = 0.8
+       max.partition.fetch.bytes = 1048576
+       bootstrap.servers = [localhost:9092]
+       ssl.keystore.type = JKS
+       enable.auto.commit = false
+       sasl.mechanism = GSSAPI
+       interceptor.classes = null
+       exclude.internal.topics = true
+       ssl.truststore.password = null
+       client.id =
+       ssl.endpoint.identification.algorithm = null
+       max.poll.records = 2147483647
+       check.crcs = true
+       request.timeout.ms = 40000
+       heartbeat.interval.ms = 3000
+       auto.commit.interval.ms = 100
+       receive.buffer.bytes = 65536
+       ssl.truststore.type = JKS
+       ssl.truststore.location = null
+       ssl.keystore.password = null
+       fetch.min.bytes = 1
+       send.buffer.bytes = 131072
+       value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+       group.id = group1
+       retry.backoff.ms = 100
+       sasl.kerberos.kinit.cmd = /usr/bin/kinit
+       sasl.kerberos.service.name = null
+       sasl.kerberos.ticket.renew.jitter = 0.05
+       ssl.trustmanager.algorithm = PKIX
+       ssl.key.password = null
+       fetch.max.wait.ms = 500
+       sasl.kerberos.min.time.before.relogin = 60000
+       connections.max.idle.ms = 540000
+       session.timeout.ms = 15000
+       metrics.num.samples = 2
+       key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+       ssl.protocol = TLS
+       ssl.provider = null
+       ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+       ssl.keystore.location = null
+       ssl.cipher.suites = null
+       security.protocol = PLAINTEXT
+       ssl.keymanager.algorithm = SunX509
+       metrics.sample.window.ms = 30000
+       auto.offset.reset = earliest
+```

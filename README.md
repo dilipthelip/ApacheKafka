@@ -1,6 +1,6 @@
 # ApacheKafka
 
-This tutorial is created is based on the tutorial from PluralSight. This README is totally based on Windows OS.    
+This tutorial is created is based on the tutorial from PluralSight.    
 
 [KafkaMustLookLink](https://kafka.apache.org/0100/documentation.html)
 

@@ -224,7 +224,7 @@ advertised.listeners=PLAINTEXT://localhost:9092
 -	Run the following command **kafka-console-consumer.bat --zookeeper localhost:2181 --topic my_topic --from-beginning**.  
 -	Start typing the messge in the producer window and those messages will be rendered in the console window.  
 
-**MAC: **
+**MAC :**
 
 ```
 ./kafka-console-consumer.sh --bootstrap-server 10.1.1.1:8080 --topic xyz --new-consumer --consumer.config /opt/client-ssl.properties --from-beginning
